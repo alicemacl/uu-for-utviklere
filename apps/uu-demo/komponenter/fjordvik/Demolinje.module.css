@@ -1,0 +1,18 @@
+/* Den lille demolinjen nede til høyre, over cookie-banneret. Hører ikke til demosiden.
+   «nav.» foran gjør at reglene vinner over lenkefargene til Fjordvik-sidene. */
+nav.demolinje {
+  position: fixed; bottom: 6.5rem; right: 0.75rem; z-index: 1000;
+  display: flex; align-items: center; gap: 0.25rem;
+  padding: 0.3rem; border-radius: 999px;
+  background: #0b0b26; color: #ffffff;
+  font: 600 0.875rem/1.2 system-ui, -apple-system, "Segoe UI", sans-serif;
+  box-shadow: 0 4px 16px rgba(0,0,0,.3);
+}
+.merke { padding: 0.35rem 0.7rem; border-radius: 999px; }
+.merkeFeil { background: #ffb3b3; color: #4a0000; }
+.merkeOk { background: #a8f0c6; color: #003d1c; }
+nav.demolinje a { color: #ffffff; padding: 0.35rem 0.7rem; border-radius: 999px; text-decoration: none; }
+nav.demolinje a:hover { background: #2a2a5c; }
+nav.demolinje a:focus-visible { outline: 3px solid #9795ff !important; outline-offset: 2px; }
+nav.demolinje ul { display: flex; gap: 0.25rem; margin: 0; padding: 0; list-style: none; }
+@media print { nav.demolinje { display: none; } }
