@@ -8,7 +8,7 @@ const feilFiler = [
 
 // Filene med feil med vilje gir advarsler i stedet for feil.
 // Kjør `pnpm lint` for å se hvilke av feilene lint fanger – og hvilke den ikke ser.
-export default [
+const oppsett = [
   ...uuEslint({ feilFiler }),
   {
     // Bare UU-regler i feilfilene, så lint-demoen handler om det den skal
@@ -16,3 +16,5 @@ export default [
     rules: { '@next/next/no-location-assign-relative-destination': 'off' },
   },
 ];
+
+export default oppsett;
