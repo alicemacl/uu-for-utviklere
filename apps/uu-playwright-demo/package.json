@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "playwright test",
+    "test:ci": "node scripts/forventet-resultat.mjs",
     "report": "playwright show-report"
   },
   "dependencies": {

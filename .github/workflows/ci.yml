@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  sjekk:
+    name: Lint, typer, bygg og tester
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Installer avhengigheter
+        run: pnpm install --frozen-lockfile
+
+      # jsx-a11y gir advarsler på feilene med vilje og feil på all annen kode
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typesjekk
+        run: pnpm typecheck
+
+      - name: Bygg
+        run: pnpm build
+
+      - name: Installer Chromium for Playwright
+        run: pnpm --filter uu-playwright-demo exec playwright install --with-deps chromium
+
+      # Demo-feilene skal feile, resten skal passere – se scripts/forventet-resultat.mjs
+      - name: Playwright-demoen
+        run: pnpm --filter uu-playwright-demo test:ci
+
+      - name: uu-demo
+        run: pnpm --filter uu-demo test
+
+      - name: Last opp testrapporter
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-rapporter
+          path: |
+            apps/*/playwright-report/
+          retention-days: 14

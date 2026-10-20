@@ -86,7 +86,8 @@ export async function Variant(props: VariantProps) {
   }
 
   return (
-    <div className={[e.side, feil ? e.feil : e.riktig, bred && e.bred].filter(Boolean).join(' ')}>
+    // data-variant lar testene hoppe over feilene med vilje når de kjører axe på resten av siden
+    <div className={[e.side, feil ? e.feil : e.riktig, bred && e.bred].filter(Boolean).join(' ')} data-variant={variant}>
       <h3 className={e.sideTittel}>
         <span className={e.merke}>{merke}</span>
         {tittel && <code>{tittel}</code>}
