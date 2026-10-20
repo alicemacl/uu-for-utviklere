@@ -1,0 +1,83 @@
+/* ---------- Ett eksempel med før- og etter-variant ---------- */
+.eksempel { border-top: 1px solid var(--linje); padding: 2rem 0 2.5rem; }
+.eksempel > h2 .nr { color: var(--lavendel); margin-right: 0.5rem; font-variant-numeric: tabular-nums; }
+.eksempel > p { max-width: 56rem; margin: 0 0 0.75rem; }
+.prov { color: var(--fersken); }
+.prov strong { font-weight: 700; }
+
+.par { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 1.25rem; }
+@media (min-width: 60rem) { .par { grid-template-columns: 1fr 1fr; } }
+
+.side { display: flex; flex-direction: column; gap: 0.75rem; min-width: 0; }
+.bred { grid-column: 1 / -1; }
+.sideTittel { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.merke {
+  display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px;
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+}
+.feil .merke { background: var(--feil); color: #3a0000; }
+.riktig .merke { background: var(--ok); color: #00321a; }
+
+/* Den levende demoen – en «nettside» med lyse farger */
+.live {
+  background: #ffffff; color: #1c2326; border-radius: var(--radius);
+  padding: 1.25rem; min-height: 5rem;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1rem; line-height: 1.5;
+  position: relative; overflow: auto;
+  border: 3px solid transparent;
+}
+.feil .live { border-color: var(--feil); }
+.riktig .live { border-color: var(--ok); }
+.liveRamme { padding: 0; overflow: hidden; }
+.liveRamme iframe { display: block; width: 100%; border: 0; background: #fff; }
+
+/* Simulatorene i grep 5 */
+.simSmal .live { max-width: 320px; }
+.simTekstavstand .live * {
+  line-height: 1.5 !important; letter-spacing: 0.12em !important; word-spacing: 0.16em !important;
+}
+.simTekstavstand .live p { margin-bottom: 2em !important; }
+
+.srSier {
+  margin: 0; padding: 0.75rem 1rem; border-radius: 10px;
+  background: var(--navy-2); border-left: 4px solid var(--lavendel);
+}
+.srSierEtikett { display: block; font-size: 0.8rem; font-weight: 700; color: var(--lavendel); text-transform: uppercase; letter-spacing: 0.05em; }
+.feil .srSier { border-left-color: var(--feil); }
+.riktig .srSier { border-left-color: var(--ok); }
+
+.kontrast { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+.kontrast li { padding: 0.3rem 0.75rem; border-radius: 8px; font-size: 0.875rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.kontrast .bestatt { background: var(--ok-bg); color: var(--ok); }
+.kontrast .stryk { background: var(--feil-bg); color: var(--feil); }
+
+/* ---------- Kodevisningen ---------- */
+.kode { border-radius: var(--radius); background: var(--kode-bg); border: 1px solid var(--linje); min-width: 0; }
+.kode > summary {
+  cursor: pointer; padding: 0.55rem 1rem; font-size: 0.875rem; font-weight: 600; color: var(--dempet);
+  list-style-position: inside;
+}
+.kode > summary:hover { color: #fff; }
+
+.faner { display: flex; flex-wrap: wrap; gap: 0.25rem; padding: 0 1rem 0.5rem; }
+.fane {
+  font-family: var(--mono); font-size: 0.78rem; color: var(--dempet);
+  padding: 0.25rem 0.7rem; border-radius: 999px; border: 1px solid var(--linje); cursor: pointer; outline: none;
+}
+.fane[data-hovered] { color: #fff; background: var(--navy-3); }
+.fane[data-selected] { color: var(--navy); background: var(--lavendel); border-color: var(--lavendel); }
+.fane[data-focus-visible] { outline: 3px solid var(--fersken); outline-offset: 2px; }
+.fanepanel { outline: none; }
+.fanepanel[data-focus-visible] { outline: 3px solid var(--fersken); outline-offset: -3px; }
+.filnavn { margin: 0; padding: 0 1rem 0.4rem; font-family: var(--mono); font-size: 0.78rem; color: var(--dempet); }
+
+/* Shiki lager <pre> med farger fra temaet vårt */
+.kode pre {
+  margin: 0; padding: 0.25rem 1rem 1rem; overflow: auto; max-height: 34rem;
+  font-family: var(--mono); font-size: 0.82rem; line-height: 1.6; tab-size: 2;
+  white-space: pre-wrap; overflow-wrap: anywhere;
+  background: transparent !important;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+.kode pre:focus-visible { outline-offset: -3px; }

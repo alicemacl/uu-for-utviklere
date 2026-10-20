@@ -1,0 +1,43 @@
+.hopp {
+  position: absolute; left: 1rem; top: -10rem; z-index: 100;
+  background: var(--fersken); color: var(--navy); font-weight: 700;
+  padding: 0.6rem 1rem; border-radius: 8px;
+}
+.hopp:focus { top: 1rem; }
+.hopp:hover { color: var(--navy); }
+
+/* ---------- Topp ---------- */
+.topp { border-bottom: 1px solid var(--linje); }
+.toppIndre {
+  max-width: var(--bredde); margin: 0 auto; padding: 0.75rem 1.5rem;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 2rem;
+}
+.merkevare { font-weight: 700; color: var(--tekst); text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
+.merkevarePrikk {
+  width: 1.4rem; height: 1.4rem; border-radius: 6px;
+  background: linear-gradient(160deg, #ece6f4 0%, #f3cfae 45%, #d99be0 75%, #a46ad8 100%);
+}
+.hovedmeny ul { display: flex; flex-wrap: wrap; gap: 0.25rem; margin: 0; padding: 0; list-style: none; }
+.hovedmeny a {
+  display: block; padding: 0.35rem 0.7rem; border-radius: 999px;
+  color: var(--dempet); text-decoration: none; font-size: 0.875rem; font-weight: 600;
+}
+.hovedmeny a:hover { color: #fff; background: var(--navy-3); }
+.hovedmeny a[aria-current="page"] { color: var(--navy); background: var(--lavendel); }
+
+/* ---------- Innhold ---------- */
+.innhold { display: block; max-width: var(--bredde); margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+/* ---------- Bla mellom sider ---------- */
+.bla { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--linje); }
+.bla a { display: flex; flex-direction: column; text-decoration: none; padding: 0.75rem 1rem; border-radius: 10px; border: 1px solid var(--linje); min-width: 14rem; }
+.bla a:hover { background: var(--navy-2); }
+.bla small { color: var(--dempet); }
+.bla .neste { text-align: right; margin-left: auto; }
+
+.bunn { border-top: 1px solid var(--linje); color: var(--dempet); font-size: 0.875rem; }
+.bunn p { max-width: var(--bredde); margin: 0 auto; padding: 1.25rem 1.5rem; }
+
+@media print {
+  .topp, .bunn, .bla, .hopp { display: none; }
+}

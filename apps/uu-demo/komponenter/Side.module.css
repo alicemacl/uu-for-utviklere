@@ -1,0 +1,75 @@
+/* Felles byggeklosser for sidene i skallet */
+.overtittel { color: var(--lavendel); font-weight: 600; font-size: 0.875rem; margin: 0 0 0.5rem; letter-spacing: 0.02em; }
+.ingress { font-size: 1.15rem; color: var(--dempet); max-width: 52rem; margin: 0 0 1.5rem; }
+
+.huskeregel {
+  background: var(--lavendel); color: var(--navy);
+  border-radius: var(--radius); padding: 1rem 1.25rem; max-width: 52rem;
+  font-weight: 500; margin: 0 0 2.5rem;
+}
+.huskeregel strong { font-weight: 700; }
+.huskeregel code { color: var(--navy); }
+
+.sidelinje { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 1rem; margin: 0 0 2rem; }
+.innholdsliste { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+.innholdsliste a {
+  display: inline-block; padding: 0.35rem 0.8rem; border: 1px solid var(--linje); border-radius: 999px;
+  text-decoration: none; font-size: 0.875rem; color: var(--tekst);
+}
+.innholdsliste a:hover { background: var(--navy-3); }
+.nr { color: var(--lavendel); margin-right: 0.4rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* Av/på-knapp (React Aria ToggleButton). Tilstanden står i data-selected og aria-pressed. */
+.verktoylinje { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 0; }
+.bryter {
+  font: inherit; font-size: 0.875rem; font-weight: 600;
+  padding: 0.45rem 0.9rem; border-radius: 999px;
+  border: 2px solid var(--lavendel); background: transparent; color: var(--tekst); cursor: pointer;
+}
+.bryter[data-hovered] { background: var(--navy-3); }
+.bryter[data-focus-visible] { outline: 3px solid var(--fersken); outline-offset: 3px; }
+.bryter[data-selected] { background: var(--lavendel); color: var(--navy); }
+.bryter[data-selected]::before { content: "✓ "; }
+
+/* ---------- Kort og rutenett ---------- */
+.rutenett { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr)); margin: 0; padding: 0; list-style: none; }
+.kort {
+  position: relative; display: flex; flex-direction: column; gap: 0.35rem;
+  background: var(--navy-2); border: 1px solid var(--linje); border-radius: var(--radius); padding: 1.25rem;
+}
+.kort:hover { border-color: var(--lavendel); }
+.kort h3 { font-size: 1.1rem; }
+.kort h3 a { color: var(--tekst); text-decoration: none; }
+.kort h3 a::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); }
+.kort h3 a:focus-visible { outline: none; }
+.kort:has(h3 a:focus-visible) { outline: 3px solid var(--fersken); outline-offset: 3px; }
+.kort p { margin: 0; color: var(--dempet); font-size: 0.95rem; }
+.kort .nummer {
+  display: inline-grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 8px;
+  background: var(--lavendel); color: var(--navy); font-weight: 700; font-size: 0.9rem; margin-bottom: 0.4rem;
+}
+
+.del { margin: 0 0 3.5rem; }
+.del > h2 { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+.del > h2 .nummer {
+  display: inline-grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 8px;
+  background: var(--lavendel); color: var(--navy); font-size: 1rem; font-weight: 700; flex: none;
+}
+
+.knapp {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.7rem 1.2rem; border-radius: 10px; border: 2px solid var(--lavendel);
+  font: inherit; font-weight: 700; text-decoration: none; cursor: pointer;
+  background: var(--lavendel); color: var(--navy);
+}
+.knapp:hover, .knapp[data-hovered] { background: var(--lavendel-lys); color: var(--navy); }
+.knapp[data-focus-visible] { outline: 3px solid var(--fersken); outline-offset: 3px; }
+.knapp[data-disabled] { opacity: 0.5; cursor: default; }
+.omriss { background: transparent; color: var(--tekst); }
+.omriss:hover, .omriss[data-hovered] { background: var(--navy-3); color: #fff; }
+.knapper { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1rem 0; }
+
+.boks { background: var(--navy-2); border: 1px solid var(--linje); border-radius: var(--radius); padding: 1.25rem 1.5rem; }
+.boks > :first-child { margin-top: 0; }
+.boks > :last-child { margin-bottom: 0; }
+.to { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr)); }
