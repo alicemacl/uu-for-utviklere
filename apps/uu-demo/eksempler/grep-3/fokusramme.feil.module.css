@@ -1,0 +1,2 @@
+/* I ekte kode står det ofte: *:focus { outline: none; } */
+.verktoy :focus { outline: none; }
