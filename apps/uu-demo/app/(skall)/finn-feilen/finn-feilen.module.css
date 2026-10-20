@@ -1,0 +1,22 @@
+.stepper {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+  margin: 0 0 1.5rem; padding: 0.75rem 1rem;
+  border: 1px solid var(--linje); border-radius: var(--radius); background: var(--navy-2);
+}
+.teller { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+.knapper { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0; }
+.tastetips { color: var(--dempet); font-size: 0.875rem; margin: 0; }
+
+.oppgave h2 { font-size: 2rem; margin-bottom: 1rem; }
+.oppgave h2:focus { outline: none; }
+.oppgave .oppgaveLive { font-size: 1.25rem; padding: 2rem; border-color: var(--lavendel); margin-bottom: 1rem; max-width: 52rem; }
+.hint { margin: 0 0 1rem; color: var(--fersken); }
+.hint summary { cursor: pointer; font-weight: 600; }
+
+.svar { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--linje); }
+.svar > p { max-width: 56rem; }
+.svar .svarLive { margin-bottom: 1rem; }
+.wcag {
+  display: inline-block; padding: 0.2rem 0.7rem; border-radius: 999px; background: var(--navy-3);
+  color: var(--lavendel-lys); font-size: 0.875rem; font-weight: 600; margin: 0 0.4rem 0.4rem 0;
+}

@@ -1,0 +1,27 @@
+.tre { display: grid; gap: 1rem; margin: 0 0 1.5rem; padding: 0; list-style: none; counter-reset: tre; }
+.tre li { display: flex; gap: 1rem; align-items: flex-start; background: var(--navy-2); border: 1px solid var(--linje); border-radius: var(--radius); padding: 1rem 1.25rem; counter-increment: tre; }
+.tre li::before { content: "0" counter(tre); flex: none; display: inline-grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 8px; background: var(--lavendel); color: var(--navy); font-weight: 700; }
+.tre strong { display: block; font-size: 1.1rem; }
+.tre span { color: var(--dempet); }
+.oppmuntring { background: var(--navy-3); border-radius: var(--radius); padding: 1rem 1.25rem; margin: 0 0 3rem; }
+
+.sjekk { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr)); margin-bottom: 1rem; }
+.sjekk fieldset { margin: 0; background: var(--navy-2); border: 1px solid var(--linje); border-radius: var(--radius); padding: 1rem 1.25rem 1.25rem; min-width: 0; }
+.sjekk legend { font-weight: 700; font-size: 1.1rem; padding: 0 0.4rem; }
+.sjekk label { display: flex; gap: 0.65rem; align-items: flex-start; padding: 0.35rem 0; cursor: pointer; }
+.sjekk input { width: 1.25rem; height: 1.25rem; margin: 0.2rem 0 0; flex: none; accent-color: var(--lavendel); }
+.sjekk input:checked + span { color: var(--dempet); text-decoration: line-through; text-decoration-color: var(--lavendel); }
+.framdrift { font-weight: 700; color: var(--lavendel-lys); }
+
+.avstand { margin-top: 3rem; }
+
+.lenker { columns: 2 18rem; padding-left: 1.2rem; }
+.lenker li { margin-bottom: 0.5rem; break-inside: avoid; }
+.lenker small { display: block; color: var(--dempet); }
+
+@media print {
+  .sjekk fieldset, .tre li, .oppmuntring { background: #fff; color: #000; border-color: #999; }
+  .utskriftSkjul { display: none; }
+  .side a { color: #000; }
+  .lenker a::after { content: " – " attr(href); font-size: 0.8em; }
+}
