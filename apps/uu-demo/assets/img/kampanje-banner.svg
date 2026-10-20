@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" width="600" height="160">
+  <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#0b5a6b"/><stop offset="1" stop-color="#2f7d8a"/></linearGradient></defs>
+  <rect width="600" height="160" rx="12" fill="url(#g)"/>
+  <text x="32" y="66" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#ffffff">Ny sone C fra 1. november</text>
+  <text x="32" y="106" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#d8f0f2">Søk innen 15. oktober og få 50 % rabatt første år</text>
+</svg>

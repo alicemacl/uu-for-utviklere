@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grep 5: Kontrast og zoom – UU-demo</title>
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../assets/eksempler.css">
+</head>
+<body data-rot="../" data-side="grep-5" data-grep="5">
+<main>
+  <p class="overtittel">Del 4 · Konkrete grep i koden</p>
+  <h1>Grep 5: Kontrast og zoom</h1>
+  <p class="ingress">Tekst trenger minst 4,5:1 kontrastforhold mot bakgrunnen. Knapper, feltkanter og ikoner trenger minst 3:1. Siden skal tåle 200 % zoom og vises på 320 px bredde uten vannrett rulling.</p>
+  <p class="huskeregel"><strong>Huskeregel:</strong> Kontrast og zoom handler ikke om estetikk – det handler om lesbarhet for alle.</p>
+  <div class="sidelinje">
+    <nav aria-label="På denne siden" data-innhold></nav>
+    <button type="button" class="bryter" data-kodebryter aria-pressed="false">Skjul all kode</button>
+  </div>
+
+  <section class="eksempel">
+    <h2>Tekstkontrast</h2>
+    <p>Lys grå tekst ser elegant ut på en skarp skjerm på kontoret – og forsvinner på en mobil i sola eller på en gammel prosjektor. Kontrasten under måles direkte i nettleseren.</p>
+    <p class="prov"><strong>Prøv:</strong> Hold musepekeren over teksten med DevTools sin inspektør åpen – kontrasten vises i verktøytipset. Eller se på salen: Hvem på bakerste rad kan lese «før»?</p>
+    <script type="text/html" data-variant="feil" data-tittel="#a3a3a3" data-kontrast="tekst|.info-a|Brødtekst; tekst|.info-a small|Liten tekst">
+      <style>
+        .info-a { color: #a3a3a3; }
+        .info-a small { color: #c2c2c2; }
+      </style>
+      <p class="info-a">
+        Behandlingstiden er normalt 2–3 uker.<br>
+        <small>Sist oppdatert 3. oktober</small>
+      </p>
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="#4a5558" data-kontrast="tekst|.info-b|Brødtekst; tekst|.info-b small|Liten tekst">
+      <style>
+        .info-b { color: #4a5558; }
+        .info-b small { color: #5f6b6e; }
+      </style>
+      <p class="info-b">
+        Behandlingstiden er normalt 2–3 uker.<br>
+        <small>Sist oppdatert 3. oktober</small>
+      </p>
+    </script>
+  </section>
+
+  <section class="eksempel">
+    <h2>Kontrast på felt og knapper</h2>
+    <p>Kravet gjelder ikke bare tekst. Kanten på et skjemafelt må ha 3:1 mot bakgrunnen, ellers ser mange ikke at det finnes et felt å skrive i.</p>
+    <p class="prov"><strong>Prøv:</strong> Hvor mange felt ser du i «før»?</p>
+    <script type="text/html" data-variant="feil" data-tittel="border: #e4e4e4" data-kontrast="kant|.felt-a input|Feltkant">
+      <style>
+        .felt-a input { border: 1px solid #e4e4e4; }
+      </style>
+      <div class="felt felt-a">
+        <label for="navn-52f">Navn</label>
+        <input id="navn-52f">
+      </div>
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="border: #5f6b6e" data-kontrast="kant|.felt-b input|Feltkant">
+      <style>
+        .felt-b input { border: 2px solid #5f6b6e; }
+      </style>
+      <div class="felt felt-b">
+        <label for="navn-52r">Navn</label>
+        <input id="navn-52r">
+      </div>
+    </script>
+  </section>
+
+  <section class="eksempel">
+    <h2>Ikke bruk farge alene</h2>
+    <p>Lenker som bare skiller seg fra teksten med farge, er usynlige for mange fargeblinde. Understreking er gratis.</p>
+    <p class="prov"><strong>Prøv:</strong> DevTools → Rendering → «Emulate vision deficiencies» → Achromatopsia. Hvor er lenken?</p>
+    <script type="text/html" data-variant="feil" data-tittel="text-decoration: none">
+      <style>
+        .tekst-a a { color: #2b5f6a; text-decoration: none; }
+      </style>
+      <p class="tekst-a">
+        Du må være folkeregistrert i sonen. Les <a href="#">reglene for beboerparkering</a> før du søker.
+      </p>
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="understreket">
+      <style>
+        .tekst-b a { color: #0b5a6b; text-decoration: underline; }
+      </style>
+      <p class="tekst-b">
+        Du må være folkeregistrert i sonen. Les <a href="#">reglene for beboerparkering</a> før du søker.
+      </p>
+    </script>
+  </section>
+
+  <section class="eksempel" data-sim="smal tekstavstand">
+    <h2>Zoom, smal skjerm og tekstavstand</h2>
+    <p>Faste bredder og høyder ser bra ut helt til noen zoomer, bruker stor tekst eller øker linjeavstanden for å lese bedre. 400 % zoom på en 1280 px skjerm tilsvarer 320 px bredde.</p>
+    <p class="prov"><strong>Prøv:</strong> Slå på bryterne under, én om gangen. Prøv også ekte zoom med <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> og <kbd>+</kbd>.</p>
+    <script type="text/html" data-variant="feil" data-tittel="width + height i px">
+      <style>
+        .kort-a { width: 560px; height: 150px; overflow: hidden; }
+        .kort-a .priser { display: flex; }
+        .kort-a .priser span { width: 280px; }
+      </style>
+      <div class="kortdemo kort-a">
+        <p class="kort-tittel">Beboerparkering</p>
+        <p>Tillatelsen gjelder i ett år. Søk innen 15. oktober for å få tillatelse fra første dag.</p>
+        <p class="priser"><span>Pris: 1 200 kr per år</span><span>El-bil: 600 kr per år</span></p>
+      </div>
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="max-width + min-height + wrap">
+      <style>
+        .kort-b { max-width: 560px; min-height: 150px; }
+        .kort-b .priser { display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
+      </style>
+      <div class="kortdemo kort-b">
+        <p class="kort-tittel">Beboerparkering</p>
+        <p>Tillatelsen gjelder i ett år. Søk innen 15. oktober for å få tillatelse fra første dag.</p>
+        <p class="priser"><span>Pris: 1 200 kr per år</span><span>El-bil: 600 kr per år</span></p>
+      </div>
+    </script>
+  </section>
+
+  <section class="eksempel">
+    <h2>Ikke blokker zoom på mobil</h2>
+    <p>Denne linjen ligger i mange maler og hindrer brukerne i å knipe for å zoome. Den gir ingen fordel – fjern den.</p>
+    <script type="text/html" data-variant="feil" data-tittel="user-scalable=no" data-bare-kode>
+      <meta name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="la brukeren zoome" data-bare-kode>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    </script>
+  </section>
+</main>
+<script src="../assets/site.js"></script>
+</body>
+</html>

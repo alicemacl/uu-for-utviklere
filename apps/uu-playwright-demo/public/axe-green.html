@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Påmelding</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Fortsatt fjernet – axe merker det ikke */
+    *:focus { outline: none; }
+  </style>
+</head>
+<body>
+  <!-- Alt axe klagde på er fikset. Det betyr ikke at siden er universelt utformet. -->
+  <div class="header">
+    <img src="logo.svg" class="logo" alt="Kurskatalogen">
+    <div class="nav">
+      <a href="/">Hjem</a>
+      <a href="/kurs">Kurs</a>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="title">Meld deg på UU-kurset</div>
+
+    <form>
+      <div class="row">
+        <label class="field second">E-post <input id="epost" type="email"></label>
+        <label class="field first">Navn <input id="navn"></label>
+      </div>
+      <p class="hint">Vi deler aldri e-postadressen din.</p>
+
+      <div class="actions">
+        <a href="#" class="btn" onclick="send(event)">Send inn</a>
+        <div class="btn secondary" onclick="avbryt()">Avbryt</div>
+      </div>
+    </form>
+    <p id="status" class="status"></p>
+  </div>
+
+  <script>
+    function send(e) { e.preventDefault(); document.getElementById('status').textContent = 'Takk, du er påmeldt!'; }
+    function avbryt() { document.querySelector('form').reset(); }
+  </script>
+</body>
+</html>

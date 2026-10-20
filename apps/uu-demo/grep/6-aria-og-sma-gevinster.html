@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grep 6 og 7: ARIA og små gevinster – UU-demo</title>
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../assets/eksempler.css">
+  <script>
+    function tell(el) {
+      el.textContent = el.textContent.replace(/\d+/, function (n) { return Number(n) + 1; });
+    }
+
+    function vekslePanel(knapp) {
+      var apen = knapp.getAttribute('aria-expanded') === 'true';
+      knapp.setAttribute('aria-expanded', String(!apen));
+      document.getElementById(knapp.getAttribute('aria-controls')).hidden = apen;
+    }
+
+    function lagreKladd(knapp) {
+      var status = knapp.parentNode.querySelector('[role="status"]');
+      status.textContent = 'Søknaden er lagret som kladd.';
+    }
+  </script>
+</head>
+<body data-rot="../" data-side="grep-6" data-grep="6">
+<main>
+  <p class="overtittel">Del 4 · Konkrete grep i koden</p>
+  <h1>Grep 6 og 7: ARIA og små gevinster</h1>
+  <p class="ingress">ARIA er bare for når HTML ikke holder. Første regel for ARIA er å ikke bruke ARIA når HTML kan gjøre jobben. Og noen av de minste grepene – som <code>lang</code> og <code>prefers-reduced-motion</code> – er blant de raskeste å fikse.</p>
+  <p class="huskeregel"><strong>Huskeregel:</strong> Ingen ARIA er bedre enn dårlig ARIA.</p>
+  <div class="sidelinje">
+    <nav aria-label="På denne siden" data-innhold></nav>
+    <button type="button" class="bryter" data-kodebryter aria-pressed="false">Skjul all kode</button>
+  </div>
+
+  <section class="eksempel">
+    <h2>role="button" er ikke nok</h2>
+    <p>ARIA endrer bare hva skjermleseren <em>sier</em> – ikke hva elementet <em>gjør</em>. En <code>&lt;div role="button"&gt;</code> lover en knapp, men trenger fortsatt <code>tabindex="0"</code>, tastaturhåndtering for Enter og mellomrom, fokusstil og logikk for deaktivert tilstand. Eller du kan bruke <code>&lt;button&gt;</code>.</p>
+    <p class="prov"><strong>Prøv:</strong> Tab til knappen. Hva skjer i «før»?</p>
+    <script type="text/html" data-variant="feil" data-tittel="<div role=&quot;button&quot;>" data-sier="«Lik (0), knapp» – hvis du finner den med skjermleserens piltaster. Med Tab kommer du aldri dit, og Enter gjør ingenting.">
+      <div role="button" class="knapp" onclick="tell(this)">Lik (0)</div>
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="<button>" data-sier="«Lik (0), knapp» – og den virker.">
+      <button type="button" class="knapp" onclick="tell(this)">Lik (0)</button>
+    </script>
+  </section>
+
+  <section class="eksempel">
+    <h2>aria-hidden på noe som kan få fokus</h2>
+    <p><code>aria-hidden="true"</code> skjuler innholdet for skjermleseren, men ikke for tastaturet. Resultatet er en lenke du kan tabbe til, men som er stum.</p>
+    <p class="prov"><strong>Prøv:</strong> Tab til lenken med skjermleser på.</p>
+    <script type="text/html" data-variant="feil" data-tittel="aria-hidden=&quot;true&quot;" data-sier="(ingenting – eller bare «tom») når fokus lander på lenken.">
+      <div aria-hidden="true">
+        <p>Les <a href="#">vilkårene for beboerparkering</a> før du søker.</p>
+      </div>
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="ingen aria-hidden" data-sier="«lenke, vilkårene for beboerparkering»" data-merk="Skal noe være skjult for alle, bruk hidden. Skal et område være synlig men utilgjengelig – for eksempel bak en åpen dialog – bruk inert.">
+      <div>
+        <p>Les <a href="#">vilkårene for beboerparkering</a> før du søker.</p>
+      </div>
+    </script>
+  </section>
+
+  <section class="eksempel">
+    <h2>aria-label som overstyrer synlig tekst</h2>
+    <p><code>aria-label</code> erstatter teksten i elementet. Når den ikke stemmer med det som står på knappen, hører skjermleserbrukeren noe annet enn det andre ser – og talestyring («klikk Søk nå») virker ikke.</p>
+    <p class="prov"><strong>Prøv:</strong> Se på «Name» i Accessibility-fanen i DevTools for begge knappene.</p>
+    <script type="text/html" data-variant="feil" data-tittel="aria-label=&quot;btn-cta-primary&quot;" data-sier="«btn-cta-primary, knapp»">
+      <button type="button" class="knapp" aria-label="btn-cta-primary">Søk nå</button>
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="teksten er navnet" data-sier="«Søk nå, knapp»">
+      <button type="button" class="knapp">Søk nå</button>
+    </script>
+  </section>
+
+  <section class="eksempel">
+    <h2>Når ARIA er riktig: tilstand</h2>
+    <p>HTML har ikke et eget element for alt. Et trekkspill trenger å fortelle om det er åpent eller lukket – da er <code>aria-expanded</code> på en ekte knapp riktig verktøy. (Og trenger du ikke full kontroll over utseendet, gir <code>&lt;details&gt;</code> og <code>&lt;summary&gt;</code> deg alt dette gratis.)</p>
+    <p class="prov"><strong>Prøv:</strong> Åpne og lukk med tastaturet. Lytt etter «sammenslått» og «utvidet».</p>
+    <script type="text/html" data-variant="feil" data-tittel="<div onclick>" data-sier="«Hva koster det? ▾» – ingen rolle, ingen tilstand, ikke i Tab-rekkefølgen.">
+      <div class="trekkspill">
+        <div class="trekkspill-tittel"
+             onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden">Hva koster det? ▾</div>
+        <div class="trekkspill-innhold" hidden>1 200 kr per år, 600 kr for el-bil.</div>
+      </div>
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="<button aria-expanded>" data-js="vekslePanel" data-sier="«Hva koster det?, knapp, sammenslått» → «utvidet»">
+      <div class="trekkspill">
+        <h4>
+          <button type="button" aria-expanded="false" aria-controls="pris-64"
+                  onclick="vekslePanel(this)">
+            Hva koster det? <span class="pil" aria-hidden="true">▾</span>
+          </button>
+        </h4>
+        <div class="trekkspill-innhold" id="pris-64" hidden>1 200 kr per år, 600 kr for el-bil.</div>
+      </div>
+    </script>
+  </section>
+
+  <section class="eksempel">
+    <h2>Statusmeldinger med role="status"</h2>
+    <p>En melding som dukker opp et annet sted på siden, ser du – men skjermleseren vet ikke at den kom. Et element med <code>role="status"</code> som finnes på siden fra start, blir lest opp når innholdet endres.</p>
+    <p class="prov"><strong>Prøv:</strong> Trykk «Lagre kladd» med skjermleser på.</p>
+    <script type="text/html" data-variant="feil" data-tittel="vanlig <div>" data-sier="(ingenting – fokus blir på knappen, og meldingen blir aldri lest)">
+      <div>
+        <button type="button" class="knapp" onclick="this.nextElementSibling.textContent = 'Søknaden er lagret som kladd.'">Lagre kladd</button>
+        <div class="status-ut"></div>
+      </div>
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="role=&quot;status&quot;" data-js="lagreKladd" data-sier="«Søknaden er lagret som kladd.»">
+      <div>
+        <button type="button" class="knapp" onclick="lagreKladd(this)">Lagre kladd</button>
+        <div class="status-ut" role="status"></div>
+      </div>
+    </script>
+  </section>
+
+  <section class="eksempel" data-grep="7">
+    <h2>lang på html-elementet</h2>
+    <p>Malen fra Vite og Create React App har <code>lang="en"</code>. Da leser skjermleseren norsk tekst med engelsk stemme. Riktig språk gir også riktig orddeling, stavekontroll og oversettelse. Bruk <code>lang="en"</code> på enkeltord eller avsnitt som faktisk er engelske.</p>
+    <p class="prov"><strong>Prøv:</strong> Les teksten i begge rammene med skjermleser. Hør på uttalen.</p>
+    <script type="text/html" data-variant="feil" data-tittel="lang=&quot;en&quot;" data-ramme="150" data-sier="Norsk tekst med engelsk stemme og uttale – «Søk» blir til noe sånt som «Sook».">
+      <!DOCTYPE html>
+      <html lang="en">
+      <head><title>Fjordvik kommune</title><link rel="stylesheet" href="../assets/ramme.css"></head>
+      <body>
+        <main>
+          <h1>Beboerparkering</h1>
+          <p>Søk før fristen 15. oktober. Tillatelsen gjelder i ett år.</p>
+        </main>
+      </body>
+      </html>
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="lang=&quot;no&quot;" data-ramme="150" data-sier="Norsk tekst med norsk stemme.">
+      <!DOCTYPE html>
+      <html lang="no">
+      <head><title>Fjordvik kommune</title><link rel="stylesheet" href="../assets/ramme.css"></head>
+      <body>
+        <main>
+          <h1>Beboerparkering</h1>
+          <p>Søk før fristen 15. oktober. Tillatelsen gjelder i ett år.</p>
+        </main>
+      </body>
+      </html>
+    </script>
+  </section>
+
+  <section class="eksempel" data-grep="7">
+    <h2>prefers-reduced-motion</h2>
+    <p>Animasjoner som glir, spretter eller ruller kan gi svimmelhet og kvalme for personer med vestibulære plager. Mange har slått på «Reduser bevegelse» i operativsystemet – respekter det.</p>
+    <p class="prov"><strong>Prøv:</strong> DevTools → Rendering → «Emulate CSS media feature prefers-reduced-motion» → reduce. Eller slå det på i macOS (Tilgjengelighet → Skjerm) eller Windows (Animasjonseffekter av).</p>
+    <script type="text/html" data-variant="feil" data-tittel="alltid animasjon">
+      <style>
+        .rull-a { animation: rull-a 6s linear infinite; white-space: nowrap; }
+        @keyframes rull-a { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+      </style>
+      <div style="overflow: hidden">
+        <p class="rull-a"><strong>Viktig:</strong> Ny sone C fra 1. november</p>
+      </div>
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="@media (prefers-reduced-motion)">
+      <style>
+        .rull-b { animation: rull-b 6s linear infinite; white-space: nowrap; }
+        @keyframes rull-b { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+
+        @media (prefers-reduced-motion: reduce) {
+          .rull-b { animation: none; white-space: normal; }
+        }
+      </style>
+      <div style="overflow: hidden">
+        <p class="rull-b"><strong>Viktig:</strong> Ny sone C fra 1. november</p>
+      </div>
+    </script>
+  </section>
+
+  <section class="eksempel" data-grep="7">
+    <h2>En sidetittel som sier noe</h2>
+    <p><code>&lt;title&gt;</code> er det første skjermleseren leser når siden lastes, og det som står i fanen og i historikken. «React App» i tolv faner hjelper ingen.</p>
+    <script type="text/html" data-variant="feil" data-tittel="malens tittel" data-bare-kode data-sier="«React App»">
+      <title>React App</title>
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="beskrivende tittel" data-bare-kode data-sier="«Søk om beboerparkering – Fjordvik kommune»">
+      <title>Søk om beboerparkering – Fjordvik kommune</title>
+    </script>
+  </section>
+</main>
+<script src="../assets/site.js"></script>
+</body>
+</html>

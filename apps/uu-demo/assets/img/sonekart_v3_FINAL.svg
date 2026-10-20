@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400">
+  <rect width="640" height="400" fill="#f3efe3"/>
+  <path d="M0 300 Q120 270 200 310 T400 330 Q500 350 640 320 L640 400 L0 400 Z" fill="#9fcfd6"/>
+  <path d="M330 0 Q300 80 340 150 Q370 210 330 300" fill="none" stroke="#9fcfd6" stroke-width="18"/>
+  <path d="M90 60 L310 50 L320 150 L300 210 L110 220 Z" fill="#0b5a6b" fill-opacity=".22" stroke="#0b5a6b" stroke-width="3"/>
+  <path d="M340 160 L560 140 L580 300 L430 330 L330 300 L345 230 Z" fill="#b5541c" fill-opacity=".2" stroke="#b5541c" stroke-width="3"/>
+  <path d="M110 230 L300 220 L320 300 L200 305 L100 285 Z" fill="#5a4a9c" fill-opacity=".22" stroke="#5a4a9c" stroke-width="3" stroke-dasharray="8 6"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="40" text-anchor="middle">
+    <text x="205" y="150" fill="#0b5a6b">A</text>
+    <text x="460" y="250" fill="#b5541c">B</text>
+    <text x="210" y="278" fill="#5a4a9c">C</text>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#333">
+    <text x="372" y="40">Elva</text>
+    <text x="500" y="378">Fjorden</text>
+    <text x="450" y="200">Bryggen</text>
+    <text x="150" y="250">Strandlia</text>
+    <text x="150" y="95">Sentrum</text>
+  </g>
+</svg>

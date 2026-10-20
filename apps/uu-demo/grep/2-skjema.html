@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grep 2: Skjema med label og feilmeldinger – UU-demo</title>
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../assets/eksempler.css">
+  <script>
+    function sjekkFor(event) {
+      event.preventDefault();
+      var skjema = event.target;
+      var felt = skjema.querySelector('input');
+      var feil = felt.value.indexOf('@') === -1;
+      felt.style.borderColor = feil ? 'red' : '';
+      skjema.querySelector('.rodtekst').textContent = feil ? 'Ugyldig' : '';
+      skjema.querySelector('.kvittering').textContent = feil ? '' : 'Takk!';
+    }
+
+    function sjekkEtter(event) {
+      event.preventDefault();
+      var skjema = event.target;
+      var felt = skjema.querySelector('input');
+      var melding = document.getElementById(felt.id + '-feil');
+      var feil = felt.value.indexOf('@') === -1;
+
+      melding.hidden = !feil;
+      if (feil) {
+        felt.setAttribute('aria-invalid', 'true');
+        felt.setAttribute('aria-describedby', melding.id);
+        felt.focus();
+      } else {
+        felt.removeAttribute('aria-invalid');
+        felt.removeAttribute('aria-describedby');
+      }
+      skjema.querySelector('[role="status"]').textContent = feil ? '' : 'Takk!';
+    }
+
+    function velg(chip) {
+      chip.parentNode.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('valgt'); });
+      chip.classList.add('valgt');
+    }
+  </script>
+</head>
+<body data-rot="../" data-side="grep-2" data-grep="2">
+<main>
+  <p class="overtittel">Del 4 · Konkrete grep i koden</p>
+  <h1>Grep 2: Skjema med label og feilmeldinger</h1>
+  <p class="ingress">Alle felt skal ha en synlig <code>&lt;label&gt;</code> – ikke bare placeholder-tekst. Bruk <code>aria-invalid="true"</code> på felt med feil, og koble feilmeldingen til feltet med <code>aria-describedby</code>.</p>
+  <p class="huskeregel"><strong>Huskeregel:</strong> Et skjema uten label er ubrukelig for skjermleserbrukere – og placeholder forsvinner når du begynner å skrive.</p>
+  <div class="sidelinje">
+    <nav aria-label="På denne siden" data-innhold></nav>
+    <button type="button" class="bryter" data-kodebryter aria-pressed="false">Skjul all kode</button>
+  </div>
+
+  <section class="eksempel">
+    <h2>Tekst ved siden av er ikke en label</h2>
+    <p>Teksten «E-post» står rett over feltet, men nettleseren vet ikke at de hører sammen. Med <code>&lt;label for&gt;</code> får feltet et navn – og hele teksten blir en del av klikkflaten.</p>
+    <p class="prov"><strong>Prøv:</strong> Klikk på ordet «E-post». I «etter» havner markøren i feltet.</p>
+    <script type="text/html" data-variant="feil" data-tittel="<span> + <input>" data-sier="«redigerbar tekst» – men hva skal stå her?">
+      <span class="etikett">E-post</span>
+      <input type="email">
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="<label for>" data-sier="«E-post, redigerbar tekst»">
+      <label for="epost-21">E-post</label>
+      <input type="email" id="epost-21" autocomplete="email">
+    </script>
+  </section>
+
+  <section class="eksempel">
+    <h2>Placeholder er ikke en label</h2>
+    <p>Skjermleseren bruker ofte placeholder som reserve, så den klarer seg. Det er alle andre som mister ledeteksten: Den forsvinner når du skriver, har ofte for lav kontrast, og er vanskelig for brukere med kognitive utfordringer.</p>
+    <p class="prov"><strong>Prøv:</strong> Skriv noe i begge feltene. Hva skulle det første feltet inneholde igjen?</p>
+    <script type="text/html" data-variant="feil" data-tittel="placeholder" data-sier="«Telefon, redigerbar tekst» – men ledeteksten er borte for alle som ser.">
+      <input type="tel" placeholder="Telefon">
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="<label> + hjelpetekst" data-sier="«Telefon, redigerbar tekst, 8 siffer, uten landskode»">
+      <label for="tlf-22">Telefon</label>
+      <span class="hjelp" id="tlf-22-hjelp">8 siffer, uten landskode</span>
+      <input type="tel" id="tlf-22" autocomplete="tel" aria-describedby="tlf-22-hjelp">
+    </script>
+  </section>
+
+  <section class="eksempel">
+    <h2>Feilmeldinger som blir lest opp</h2>
+    <p>En rød ramme og ordet «Ugyldig» sier ingenting til en som ikke ser fargen eller ikke finner teksten. Feilen må vises med mer enn farge, forklare hva som er galt, og være koblet til feltet.</p>
+    <p class="prov"><strong>Prøv:</strong> Skriv «hei» i feltet og trykk Send – først med mus, så med skjermleseren på.</p>
+    <script type="text/html" data-variant="feil" data-tittel="rød ramme" data-js="sjekkFor" data-sier="«Send, knapp» – og så ingenting. Fokus blir på knappen, og feilen blir aldri nevnt.">
+      <form onsubmit="sjekkFor(event)" novalidate>
+        <label for="epost-23f">E-post</label>
+        <input type="email" id="epost-23f">
+        <div class="rodtekst"></div>
+        <button class="knapp">Send</button>
+        <div class="kvittering"></div>
+      </form>
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="aria-invalid + aria-describedby" data-js="sjekkEtter" data-sier="«E-post, ugyldig data, redigerbar tekst. Feil: Skriv en e-postadresse med @, for eksempel navn@eksempel.no»">
+      <form onsubmit="sjekkEtter(event)" novalidate>
+        <label for="epost-23r">E-post</label>
+        <p class="feiltekst" id="epost-23r-feil" hidden>
+          <span aria-hidden="true">⚠</span>
+          Feil: Skriv en e-postadresse med @, for eksempel navn@eksempel.no
+        </p>
+        <input type="email" id="epost-23r" autocomplete="email">
+        <button class="knapp">Send</button>
+        <div class="kvittering" role="status"></div>
+      </form>
+    </script>
+  </section>
+
+  <section class="eksempel">
+    <h2>Grupper av valg</h2>
+    <p>Pene «chips» bygget av <code>&lt;div&gt;</code>-er har verken rolle, tilstand eller tastaturstøtte. Ekte radioknapper i en <code>&lt;fieldset&gt;</code> med <code>&lt;legend&gt;</code> gir alt dette – og de kan styles akkurat like pent.</p>
+    <p class="prov"><strong>Prøv:</strong> Tab inn i gruppen og bruk piltastene.</p>
+    <script type="text/html" data-variant="feil" data-tittel="<div class=&quot;chip&quot;>" data-sier="«Sone A» – bare tekst. Ingen gruppe, ingen tilstand, og den nås ikke med Tab.">
+      <div class="etikett">Hvilken sone bor du i?</div>
+      <div class="chips">
+        <div class="chip" onclick="velg(this)">Sone A</div>
+        <div class="chip" onclick="velg(this)">Sone B</div>
+        <div class="chip" onclick="velg(this)">Sone C</div>
+      </div>
+    </script>
+    <script type="text/html" data-variant="riktig" data-tittel="<fieldset> + radio" data-sier="«Hvilken sone bor du i?, gruppe. Sone A, valgknapp, ikke valgt, 1 av 3»">
+      <fieldset>
+        <legend>Hvilken sone bor du i?</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="sone-24"> Sone A</label>
+          <label class="chip"><input type="radio" name="sone-24"> Sone B</label>
+          <label class="chip"><input type="radio" name="sone-24"> Sone C</label>
+        </div>
+      </fieldset>
+    </script>
+  </section>
+</main>
+<script src="../assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 56" width="260" height="56">
+  <circle cx="28" cy="28" r="26" fill="#0b5a6b"/>
+  <path d="M6 34 L18 20 L26 29 L33 21 L50 34 Z" fill="#ffffff"/>
+  <path d="M4 38 Q12 34 20 38 T36 38 T52 38 L52 44 Q40 52 28 52 Q14 52 4 44 Z" fill="#7cc4c9"/>
+  <text x="64" y="26" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" fill="#0b3a44">Fjordvik</text>
+  <text x="64" y="46" font-family="Arial, Helvetica, sans-serif" font-size="14" letter-spacing="2" fill="#0b3a44">KOMMUNE</text>
+</svg>

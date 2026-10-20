@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tre ting i morgen og sjekkliste – UU-demo</title>
+  <link rel="stylesheet" href="assets/site.css">
+  <style>
+    .tre { display: grid; gap: 1rem; margin: 0 0 1.5rem; padding: 0; list-style: none; counter-reset: tre; }
+    .tre li { display: flex; gap: 1rem; align-items: flex-start; background: var(--navy-2); border: 1px solid var(--linje); border-radius: var(--radius); padding: 1rem 1.25rem; counter-increment: tre; }
+    .tre li::before { content: "0" counter(tre); flex: none; display: inline-grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 8px; background: var(--lavendel); color: var(--navy); font-weight: 700; }
+    .tre strong { display: block; font-size: 1.1rem; }
+    .tre span { color: var(--dempet); }
+    .oppmuntring { background: var(--navy-3); border-radius: var(--radius); padding: 1rem 1.25rem; margin: 0 0 3rem; }
+
+    .sjekk { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr)); margin-bottom: 1rem; }
+    .sjekk fieldset { margin: 0; background: var(--navy-2); border: 1px solid var(--linje); border-radius: var(--radius); padding: 1rem 1.25rem 1.25rem; min-width: 0; }
+    .sjekk legend { font-weight: 700; font-size: 1.1rem; padding: 0 0.4rem; }
+    .sjekk label { display: flex; gap: 0.65rem; align-items: flex-start; padding: 0.35rem 0; cursor: pointer; }
+    .sjekk input { width: 1.25rem; height: 1.25rem; margin: 0.2rem 0 0; flex: none; accent-color: var(--lavendel); }
+    .sjekk input:checked + span { color: var(--dempet); text-decoration: line-through; text-decoration-color: var(--lavendel); }
+    .framdrift { font-weight: 700; color: var(--lavendel-lys); }
+
+    .lenker { columns: 2 18rem; padding-left: 1.2rem; }
+    .lenker li { margin-bottom: 0.5rem; break-inside: avoid; }
+    .lenker small { display: block; color: var(--dempet); }
+
+    @media print {
+      .sjekk fieldset, .tre li, .oppmuntring { background: #fff; color: #000; border-color: #999; }
+      .knapper { display: none; }
+      a { color: #000; }
+      .lenker a::after { content: " – " attr(href); font-size: 0.8em; }
+    }
+  </style>
+</head>
+<body data-side="sjekkliste">
+<main>
+  <p class="overtittel">Del 6 · Avslutning</p>
+  <h1>Tre ting du kan gjøre i morgen</h1>
+
+  <ol class="tre">
+    <li><div><strong>Tab gjennom din egen app</strong><span>Ser du fokus hele veien? Kommer du til alt – og ut igjen?</span></div></li>
+    <li><div><strong>Kjør axe på én side</strong><span>Fiks de alvorligste feilene først.</span></div></li>
+    <li><div><strong>Bytt én klikkbar &lt;div&gt; med &lt;button&gt;</strong><span>Du får tastaturnavigasjon, fokus og riktig rolle gratis.</span></div></li>
+  </ol>
+  <p class="oppmuntring">Du trenger ikke fikse alt på én gang. Start med én ting i dag.</p>
+
+  <h2>Sjekkliste</h2>
+  <p>Hakene lagres bare i din egen nettleser. <span class="framdrift" id="framdrift" aria-live="polite"></span></p>
+  <div class="knapper">
+    <button type="button" class="knapp knapp--omriss" onclick="window.print()">Skriv ut</button>
+    <button type="button" class="knapp knapp--omriss" id="nullstill">Nullstill</button>
+  </div>
+
+  <div class="sjekk" id="sjekkliste">
+    <fieldset>
+      <legend>Semantikk</legend>
+      <label><input type="checkbox"><span><code>&lt;button&gt;</code> for handlinger, <code>&lt;a href&gt;</code> for navigasjon</span></label>
+      <label><input type="checkbox"><span>Landemerker: <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code></span></label>
+      <label><input type="checkbox"><span>Én <code>&lt;h1&gt;</code>, og ingen hopp i overskriftsnivåer</span></label>
+      <label><input type="checkbox"><span>Ekte <code>&lt;table&gt;</code> for tabelldata, ekte lister for lister</span></label>
+    </fieldset>
+    <fieldset>
+      <legend>Skjema</legend>
+      <label><input type="checkbox"><span>Alle felt har en synlig <code>&lt;label&gt;</code></span></label>
+      <label><input type="checkbox"><span>Radioknapper og avkrysningsbokser er gruppert med <code>&lt;fieldset&gt;</code> og <code>&lt;legend&gt;</code></span></label>
+      <label><input type="checkbox"><span>Feil vises med tekst, ikke bare farge, og er koblet til feltet</span></label>
+      <label><input type="checkbox"><span><code>autocomplete</code> på felt om brukeren selv</span></label>
+    </fieldset>
+    <fieldset>
+      <legend>Tastatur og fokus</legend>
+      <label><input type="checkbox"><span>Alt kan brukes med tastatur alene</span></label>
+      <label><input type="checkbox"><span>Synlig fokus overalt – ingen <code>outline: none</code> uten erstatning</span></label>
+      <label><input type="checkbox"><span>«Hopp til hovedinnhold»-lenke</span></label>
+      <label><input type="checkbox"><span>Ingen <code>tabindex</code> større enn 0</span></label>
+      <label><input type="checkbox"><span>Dialoger flytter fokus inn, lukkes med Escape og gir fokus tilbake</span></label>
+    </fieldset>
+    <fieldset>
+      <legend>Bilder</legend>
+      <label><input type="checkbox"><span>Alle <code>&lt;img&gt;</code> har <code>alt</code></span></label>
+      <label><input type="checkbox"><span>Dekorative bilder har <code>alt=""</code></span></label>
+      <label><input type="checkbox"><span>Ikonknapper har et tilgjengelig navn</span></label>
+      <label><input type="checkbox"><span>Ingen viktig tekst bakt inn i bilder</span></label>
+    </fieldset>
+    <fieldset>
+      <legend>Kontrast og zoom</legend>
+      <label><input type="checkbox"><span>Tekst: minst 4,5:1 mot bakgrunnen</span></label>
+      <label><input type="checkbox"><span>Knapper, feltkanter og ikoner: minst 3:1</span></label>
+      <label><input type="checkbox"><span>Farge er aldri eneste informasjonsbærer</span></label>
+      <label><input type="checkbox"><span>Fungerer på 320 px bredde og 200 % zoom</span></label>
+      <label><input type="checkbox"><span>Ingen <code>user-scalable=no</code></span></label>
+    </fieldset>
+    <fieldset>
+      <legend>ARIA og små gevinster</legend>
+      <label><input type="checkbox"><span>ARIA bare når HTML ikke holder</span></label>
+      <label><input type="checkbox"><span>Ingen <code>aria-hidden</code> på noe som kan få fokus</span></label>
+      <label><input type="checkbox"><span>Statusmeldinger med <code>role="status"</code></span></label>
+      <label><input type="checkbox"><span><code>lang="no"</code> på <code>&lt;html&gt;</code></span></label>
+      <label><input type="checkbox"><span>Beskrivende <code>&lt;title&gt;</code> på hver side</span></label>
+      <label><input type="checkbox"><span>Animasjoner respekterer <code>prefers-reduced-motion</code></span></label>
+    </fieldset>
+  </div>
+
+  <h2 style="margin-top:3rem">Verktøy som finner det du ikke ser</h2>
+  <div class="to">
+    <div class="boks">
+      <ul>
+        <li><a href="https://www.deque.com/axe/devtools/">axe DevTools</a> – finner feil og forklarer konkrete rettelser</li>
+        <li><a href="https://developer.chrome.com/docs/lighthouse/overview">Lighthouse</a> – innebygd i Chrome, rask helsesjekk</li>
+        <li><a href="https://wave.webaim.org/">WAVE</a> – viser feilene direkte på siden</li>
+        <li><a href="https://github.com/jsx-eslint/eslint-plugin-jsx-a11y">eslint-plugin-jsx-a11y</a> – stopper feil i JSX før commit</li>
+        <li><a href="https://developer.chrome.com/docs/devtools/accessibility/reference">Accessibility tree i Chrome DevTools</a> – viser rolle og navn slik hjelpemidler ser dem</li>
+      </ul>
+    </div>
+    <div class="boks">
+      <p><strong>Husk:</strong> Automatiske verktøy finner bare en del av feilene. De ser at et bilde mangler alt-tekst, men ikke om alt-teksten er god – og de kan ikke kjenne på om skjemaet ditt er forvirrende.</p>
+      <p>Test alltid også med tastatur og skjermleser: <kbd>Cmd</kbd>+<kbd>F5</kbd> starter VoiceOver på Mac, og <a href="https://www.nvaccess.org/download/">NVDA</a> er gratis for Windows.</p>
+    </div>
+  </div>
+
+  <h2 style="margin-top:3rem">Lenker</h2>
+  <ul class="lenker">
+    <li><a href="https://www.uutilsynet.no/">Uutilsynet</a><small>Regelverk, veiledning og tilgjengelighetserklæring</small></li>
+    <li><a href="https://www.w3.org/WAI/WCAG21/quickref/">WCAG 2.1 – hurtigreferanse</a><small>Alle suksesskriterier med teknikker, fra W3C</small></li>
+    <li><a href="https://www.a11yproject.com/checklist/">The A11Y Project – sjekkliste</a><small>Praktisk sjekkliste for utviklere</small></li>
+    <li><a href="https://testing-library.com/docs/queries/byrole/">Testing Library – getByRole</a><small>Tester som bruker det samme tilgjengelighetstreet</small></li>
+  </ul>
+</main>
+<script src="assets/site.js"></script>
+<script>
+  (function () {
+    var bokser = document.querySelectorAll('#sjekkliste input[type="checkbox"]');
+    var framdrift = document.getElementById('framdrift');
+    var NOKKEL = 'uu-demo-sjekkliste';
+    var lagret = [];
+    try { lagret = JSON.parse(localStorage.getItem(NOKKEL) || '[]'); } catch (e) { lagret = []; }
+
+    function oppdater(lagre) {
+      var haker = [];
+      bokser.forEach(function (b, i) { if (b.checked) haker.push(i); });
+      framdrift.textContent = haker.length + ' av ' + bokser.length + ' er krysset av.';
+      if (lagre) { try { localStorage.setItem(NOKKEL, JSON.stringify(haker)); } catch (e) { /* lagring er valgfritt */ } }
+    }
+
+    bokser.forEach(function (b, i) {
+      b.checked = lagret.indexOf(i) !== -1;
+      b.addEventListener('change', function () { oppdater(true); });
+    });
+    document.getElementById('nullstill').addEventListener('click', function () {
+      bokser.forEach(function (b) { b.checked = false; });
+      oppdater(true);
+    });
+    oppdater(false);
+  })();
+</script>
+</body>
+</html>

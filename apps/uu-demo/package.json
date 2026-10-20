@@ -1,0 +1,9 @@
+{
+  "name": "uu-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Demo-app til kurset UU for utviklere",
+  "scripts": {
+    "start": "npx --yes serve -l 8080 ."
+  }
+}

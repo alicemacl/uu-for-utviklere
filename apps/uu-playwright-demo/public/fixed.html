@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Påmelding – UU-kurset</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <img src="logo.svg" class="logo" alt="Kurskatalogen">
+    <nav class="nav" aria-label="Hovedmeny">
+      <a href="/">Hjem</a>
+      <a href="/kurs">Kurs</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <h1 class="title">Meld deg på UU-kurset</h1>
+
+    <form id="pamelding">
+      <div class="row">
+        <!-- DOM-rekkefølge = visuell rekkefølge -->
+        <label class="field">Navn <input id="navn" name="navn" autocomplete="name" required></label>
+        <label class="field">E-post
+          <input id="epost" name="epost" type="email" autocomplete="email" required aria-describedby="epost-hint">
+        </label>
+      </div>
+      <p id="epost-hint" class="hint">Vi deler aldri e-postadressen din.</p>
+
+      <div class="actions">
+        <button type="submit" class="btn">Send inn</button>
+        <button type="reset" class="btn secondary">Avbryt</button>
+      </div>
+    </form>
+    <p id="status" class="status" role="status"></p>
+  </main>
+
+  <script>
+    document.getElementById('pamelding').addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('status').textContent = 'Takk, du er påmeldt!';
+    });
+  </script>
+</body>
+</html>

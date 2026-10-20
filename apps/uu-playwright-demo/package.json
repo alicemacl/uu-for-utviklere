@@ -1,0 +1,17 @@
+{
+  "name": "uu-playwright-demo",
+  "version": "1.0.0",
+  "description": "Demo til UU-kurset: axe-røyktest + tastaturtester i Playwright",
+  "scripts": {
+    "start": "node serve.mjs",
+    "test": "playwright test",
+    "report": "playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1"
+  }
+}

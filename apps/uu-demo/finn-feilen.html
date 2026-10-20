@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Finn feilen – UU-demo</title>
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/eksempler.css">
+  <style>
+    .stepper { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin: 0 0 1.5rem; padding: 0.75rem 1rem; border: 1px solid var(--linje); border-radius: var(--radius); background: var(--navy-2); }
+    .stepper .teller { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .stepper .knapper { margin: 0; }
+    .oppgave h2 { font-size: 2rem; margin-bottom: 1rem; }
+    .oppgave h2:focus { outline: none; }
+    .oppgave .live { font-size: 1.25rem; padding: 2rem; border-color: var(--lavendel); margin-bottom: 1rem; max-width: 52rem; }
+    .oppgave details.hint { margin: 0 0 1rem; color: var(--fersken); }
+    .oppgave details.hint summary { cursor: pointer; font-weight: 600; }
+    .svar { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--linje); }
+    .svar > p { max-width: 56rem; }
+    .wcag { display: inline-block; padding: 0.2rem 0.7rem; border-radius: 999px; background: var(--navy-3); color: var(--lavendel-lys); font-size: 0.875rem; font-weight: 600; margin: 0 0.4rem 0.4rem 0; }
+    .svar .live { font-size: 1rem; padding: 1.25rem; max-width: none; }
+    .svar .side--feil .live { border-color: var(--feil); }
+    .svar .side--riktig .live { border-color: var(--ok); }
+    .tastetips { color: var(--dempet); font-size: 0.875rem; margin: 0; }
+  </style>
+</head>
+<body data-side="finn-feilen">
+<main>
+  <p class="overtittel">Midtveis-runde · Spot the bug</p>
+  <h1>Finn feilen</h1>
+  <p class="ingress">Vis én komponent om gangen. La salen foreslå hva som er galt – og hvem som rammes – før du viser svaret. Alle komponentene er levende, så du kan teste forslagene med tastatur og skjermleser.</p>
+
+  <div class="stepper">
+    <p class="teller" id="teller" aria-live="polite">Oppgave 1 av 8</p>
+    <div class="knapper">
+      <button type="button" class="knapp knapp--omriss" id="forrige">← Forrige</button>
+      <button type="button" class="knapp" id="neste">Neste →</button>
+    </div>
+    <p class="tastetips">Tips: piltastene ← og → blar også, når fokus ikke er i en oppgave.</p>
+  </div>
+
+  <section class="oppgave" id="oppgave-1" aria-labelledby="oppgave-1-tittel">
+    <h2 id="oppgave-1-tittel" tabindex="-1">1. Toppmeny</h2>
+    <details class="hint"><summary>Hint</summary><p>Tab til knappen til høyre med skjermleser på.</p></details>
+    <script type="text/html" class="oppgave-kilde">
+      <div style="display:flex; align-items:center; justify-content:space-between">
+        <span style="font-family:Georgia,serif; font-weight:700; font-size:1.5rem; color:#0b3a44">Fjordvik</span>
+        <button type="button" class="ikonknapp">
+          <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </script>
+    <div class="svar">
+      <h3>Svar</h3>
+      <p>Menyknappen har ikke noe navn. Skjermleseren sier bare «knapp», og talestyring har ingenting å kalle den.</p>
+      <p><span class="wcag">WCAG 4.1.2 Navn, rolle, verdi</span><span class="wcag">WCAG 1.1.1 Ikke-tekstlig innhold</span></p>
+      <script type="text/html" class="fasit">
+        <div style="display:flex; align-items:center; justify-content:space-between">
+          <span style="font-family:Georgia,serif; font-weight:700; font-size:1.5rem; color:#0b3a44">Fjordvik</span>
+          <button type="button" class="ikonknapp" aria-label="Meny" aria-expanded="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </script>
+    </div>
+  </section>
+
+  <section class="oppgave" id="oppgave-2" aria-labelledby="oppgave-2-tittel">
+    <h2 id="oppgave-2-tittel" tabindex="-1">2. Nyhetskort</h2>
+    <details class="hint"><summary>Hint</summary><p>Åpne lenkelista i skjermleseren (VoiceOver <kbd>VO</kbd>+<kbd>U</kbd>, NVDA <kbd>Insert</kbd>+<kbd>F7</kbd>).</p></details>
+    <script type="text/html" class="oppgave-kilde">
+      <div class="nyhetskort">
+        <div><div class="kort-tittel">Ny sone C fra 1. november</div><p>Strandlia får beboerparkering.</p><a href="#">Les mer</a></div>
+        <div><div class="kort-tittel">Nye priser for 2027</div><p>El-bil får fortsatt halv pris.</p><a href="#">Les mer</a></div>
+        <div><div class="kort-tittel">Brøyting i vinter</div><p>Flytt bilen når det er varslet.</p><a href="#">Les mer</a></div>
+      </div>
+    </script>
+    <div class="svar">
+      <h3>Svar</h3>
+      <p>Tre lenker som heter «Les mer». I lenkelista – og for den som tabber – er det umulig å vite hvor de går. Titlene ser ut som overskrifter, men er det ikke.</p>
+      <p><span class="wcag">WCAG 2.4.4 Formål med lenke</span><span class="wcag">WCAG 1.3.1 Informasjon og relasjoner</span></p>
+      <script type="text/html" class="fasit">
+        <div class="nyhetskort">
+          <article><h3 class="kort-tittel"><a href="#">Ny sone C fra 1. november</a></h3><p>Strandlia får beboerparkering.</p></article>
+          <article><h3 class="kort-tittel"><a href="#">Nye priser for 2027</a></h3><p>El-bil får fortsatt halv pris.</p></article>
+          <article><h3 class="kort-tittel"><a href="#">Brøyting i vinter</a></h3><p>Flytt bilen når det er varslet.</p></article>
+        </div>
+      </script>
+    </div>
+  </section>
+
+  <section class="oppgave" id="oppgave-3" aria-labelledby="oppgave-3-tittel">
+    <h2 id="oppgave-3-tittel" tabindex="-1">3. Påmelding</h2>
+    <details class="hint"><summary>Hint</summary><p>Hvilke felt må fylles ut? Prøv å se på det i gråtoner (DevTools → Rendering → Emulate vision deficiencies).</p></details>
+    <script type="text/html" class="oppgave-kilde">
+      <p>Felt med rød ledetekst må fylles ut.</p>
+      <div class="felt"><label for="o3-navn" style="color:#c92a2a">Navn</label><input id="o3-navn"></div>
+      <div class="felt"><label for="o3-firma">Firma</label><input id="o3-firma"></div>
+      <div class="felt"><label for="o3-epost" style="color:#c92a2a">E-post</label><input id="o3-epost" type="email"></div>
+    </script>
+    <div class="svar">
+      <h3>Svar</h3>
+      <p>Påkrevde felt vises bare med farge. Fargeblinde ser ikke forskjellen, og skjermleseren sier ingenting om at feltet må fylles ut.</p>
+      <p><span class="wcag">WCAG 1.4.1 Bruk av farge</span><span class="wcag">WCAG 3.3.2 Ledetekster eller instruksjoner</span></p>
+      <script type="text/html" class="fasit">
+        <p>Felt merket med (må fylles ut) er påkrevd.</p>
+        <div class="felt"><label for="o3r-navn">Navn (må fylles ut)</label><input id="o3r-navn" required></div>
+        <div class="felt"><label for="o3r-firma">Firma</label><input id="o3r-firma"></div>
+        <div class="felt"><label for="o3r-epost">E-post (må fylles ut)</label><input id="o3r-epost" type="email" required autocomplete="email"></div>
+      </script>
+    </div>
+  </section>
+
+  <section class="oppgave" id="oppgave-4" aria-labelledby="oppgave-4-tittel">
+    <h2 id="oppgave-4-tittel" tabindex="-1">4. Varslingsinnstilling</h2>
+    <details class="hint"><summary>Hint</summary><p>Prøv å slå den på med tastaturet. Hva sier skjermleseren om tilstanden?</p></details>
+    <script type="text/html" class="oppgave-kilde">
+      <div class="bryterrad">
+        <div class="vippe" onclick="this.classList.toggle('pa')"></div>
+        <span>Varsle meg på SMS</span>
+      </div>
+    </script>
+    <div class="svar">
+      <h3>Svar</h3>
+      <p>Bryteren er en <code>&lt;div&gt;</code>: ingen rolle, ingen tilstand (på/av), ikke i Tab-rekkefølgen og ikke koblet til teksten. Den finnes rett og slett ikke for tastatur- og skjermleserbrukere.</p>
+      <p><span class="wcag">WCAG 2.1.1 Tastatur</span><span class="wcag">WCAG 4.1.2 Navn, rolle, verdi</span></p>
+      <script type="text/html" class="fasit">
+        <div class="bryterrad">
+          <button type="button" class="vippe" role="switch" aria-checked="false" aria-labelledby="o4-tekst"
+            onclick="this.setAttribute('aria-checked', this.getAttribute('aria-checked') !== 'true')"></button>
+          <span id="o4-tekst">Varsle meg på SMS</span>
+        </div>
+      </script>
+    </div>
+  </section>
+
+  <section class="oppgave" id="oppgave-5" aria-labelledby="oppgave-5-tittel">
+    <h2 id="oppgave-5-tittel" tabindex="-1">5. Logoen</h2>
+    <details class="hint"><summary>Hint</summary><p>Hva er navnet på lenken? Sjekk Accessibility-fanen i DevTools.</p></details>
+    <script type="text/html" class="oppgave-kilde">
+      <a href="#" class="logo-lenke"><img src="assets/img/fjordvik-logo.svg"></a>
+    </script>
+    <div class="svar">
+      <h3>Svar</h3>
+      <p>Lenken består bare av et bilde uten alt-tekst. Lenken får dermed ikke noe ordentlig navn – skjermleseren leser filnavnet eller adressen. Alt-teksten til et bilde i en lenke skal beskrive hvor lenken går.</p>
+      <p><span class="wcag">WCAG 1.1.1 Ikke-tekstlig innhold</span><span class="wcag">WCAG 2.4.4 Formål med lenke</span></p>
+      <script type="text/html" class="fasit">
+        <a href="#" class="logo-lenke"><img src="assets/img/fjordvik-logo.svg" alt="Fjordvik kommune – forsiden"></a>
+      </script>
+    </div>
+  </section>
+
+  <section class="oppgave" id="oppgave-6" aria-labelledby="oppgave-6-tittel">
+    <h2 id="oppgave-6-tittel" tabindex="-1">6. Instruksjonen</h2>
+    <details class="hint"><summary>Hint</summary><p>Les instruksjonen høyt for en som ikke ser skjermen.</p></details>
+    <script type="text/html" class="oppgave-kilde">
+      <p>Trykk på den grønne knappen for å fortsette.</p>
+      <div class="knapper">
+        <button type="button" class="knapp" style="background:#5f6b6e">Avbryt</button>
+        <button type="button" class="knapp" style="background:#2b7a3d">Fortsett</button>
+      </div>
+    </script>
+    <div class="svar">
+      <h3>Svar</h3>
+      <p>Instruksjonen bygger bare på farge. Skjermleserbrukere og mange fargeblinde vet ikke hvilken knapp som er «den grønne». Vis til teksten på knappen i stedet.</p>
+      <p><span class="wcag">WCAG 1.3.3 Sensoriske egenskaper</span><span class="wcag">WCAG 1.4.1 Bruk av farge</span></p>
+      <script type="text/html" class="fasit">
+        <p>Trykk «Fortsett» for å gå videre.</p>
+        <div class="knapper">
+          <button type="button" class="knapp sek">Avbryt</button>
+          <button type="button" class="knapp">Fortsett</button>
+        </div>
+      </script>
+    </div>
+  </section>
+
+  <section class="oppgave" id="oppgave-7" aria-labelledby="oppgave-7-tittel">
+    <h2 id="oppgave-7-tittel" tabindex="-1">7. Steg i skjemaet</h2>
+    <details class="hint"><summary>Hint</summary><p>Klikk på teksten og tab gjennom knappene. Hvilken kommer først?</p></details>
+    <script type="text/html" class="oppgave-kilde">
+      <p>Steg 2 av 3: Om bilen</p>
+      <div class="knapper" style="flex-direction: row-reverse; justify-content: flex-end">
+        <button type="button" class="knapp">Neste</button>
+        <button type="button" class="knapp sek">Tilbake</button>
+      </div>
+    </script>
+    <div class="svar">
+      <h3>Svar</h3>
+      <p><code>flex-direction: row-reverse</code> snur rekkefølgen visuelt, men ikke i koden. Tab går til «Neste» før «Tilbake», mens øyet leser motsatt. Det samme skjer med <code>order</code> og grid-plassering.</p>
+      <p><span class="wcag">WCAG 2.4.3 Fokusrekkefølge</span><span class="wcag">WCAG 1.3.2 Meningsfylt rekkefølge</span></p>
+      <script type="text/html" class="fasit">
+        <p>Steg 2 av 3: Om bilen</p>
+        <div class="knapper">
+          <button type="button" class="knapp sek">Tilbake</button>
+          <button type="button" class="knapp">Neste</button>
+        </div>
+      </script>
+    </div>
+  </section>
+
+  <section class="oppgave" id="oppgave-8" aria-labelledby="oppgave-8-tittel">
+    <h2 id="oppgave-8-tittel" tabindex="-1">8. Bekreft e-post</h2>
+    <details class="hint"><summary>Hint</summary><p>Kopier e-postadressen fra det første feltet og lim den inn i det andre. Prøv også autoutfylling.</p></details>
+    <script type="text/html" class="oppgave-kilde">
+      <div class="felt"><label for="o8-epost">E-post</label><input id="o8-epost" type="email" autocomplete="off"></div>
+      <div class="felt"><label for="o8-bekreft">Gjenta e-post</label><input id="o8-bekreft" type="email" autocomplete="off" onpaste="return false"></div>
+    </script>
+    <div class="svar">
+      <h3>Svar</h3>
+      <p>Skjemaet ber om det samme to ganger, slår av autoutfylling og blokkerer innliming. Det rammer alle som bruker passordbehandler, talegjenkjenning eller har motoriske eller kognitive utfordringer. Bruk ett felt med <code>autocomplete="email"</code>, og vis adressen på oppsummeringen før innsending.</p>
+      <p><span class="wcag">WCAG 1.3.5 Identifiser formål med inndata</span><span class="wcag">WCAG 3.3.7 Overflødig inntasting (2.2)</span></p>
+      <script type="text/html" class="fasit">
+        <div class="felt"><label for="o8r-epost">E-post</label><input id="o8r-epost" type="email" autocomplete="email"></div>
+      </script>
+    </div>
+  </section>
+</main>
+<script src="assets/site.js"></script>
+<script>
+  (function () {
+    'use strict';
+    var oppgaver = Array.prototype.slice.call(document.querySelectorAll('.oppgave'));
+    var teller = document.getElementById('teller');
+    var forrige = document.getElementById('forrige');
+    var neste = document.getElementById('neste');
+    var lag = function (tag, klasse, html) { var el = document.createElement(tag); if (klasse) el.className = klasse; if (html != null) el.innerHTML = html; return el; };
+
+    function kodeboks(kilde, etikett) {
+      var d = lag('details', 'kode'); d.open = true;
+      d.appendChild(lag('summary', null, 'Koden'));
+      var pre = lag('pre'); pre.tabIndex = 0; pre.setAttribute('aria-label', etikett);
+      pre.innerHTML = UUDemo.fargeHtml(kilde);
+      d.appendChild(pre);
+      return d;
+    }
+
+    function side(variant, kilde) {
+      var s = lag('div', 'side side--' + variant);
+      s.appendChild(lag('h4', 'side__tittel', '<span class="merke">' + (variant === 'feil' ? 'Før' : 'Etter') + '</span>'));
+      var live = lag('div', 'live'); live.innerHTML = kilde; s.appendChild(live);
+      s.appendChild(kodeboks(kilde, 'Kode: ' + (variant === 'feil' ? 'før' : 'etter')));
+      return s;
+    }
+
+    oppgaver.forEach(function (o, i) {
+      var kilde = UUDemo.dedent(o.querySelector('script.oppgave-kilde').textContent);
+      var live = lag('div', 'live'); live.innerHTML = kilde;
+      o.querySelector('details.hint').insertAdjacentElement('afterend', live);
+
+      var svar = o.querySelector('.svar');
+      svar.id = 'svar-' + (i + 1);
+      svar.hidden = true;
+      var fasit = UUDemo.dedent(svar.querySelector('script.fasit').textContent);
+      var par = lag('div', 'par');
+      par.appendChild(side('feil', kilde.replace(/id="o(\d)-/g, 'id="o$1f-').replace(/for="o(\d)-/g, 'for="o$1f-')));
+      par.appendChild(side('riktig', fasit));
+      svar.appendChild(par);
+
+      var knapp = lag('button', 'knapp', 'Vis svaret');
+      knapp.type = 'button';
+      knapp.setAttribute('aria-expanded', 'false');
+      knapp.setAttribute('aria-controls', svar.id);
+      knapp.addEventListener('click', function () {
+        var vis = svar.hidden;
+        svar.hidden = !vis;
+        knapp.setAttribute('aria-expanded', String(vis));
+        knapp.textContent = vis ? 'Skjul svaret' : 'Vis svaret';
+      });
+      live.insertAdjacentElement('afterend', knapp);
+    });
+
+    var na = 0;
+    function vis(indeks, flyttFokus) {
+      na = Math.max(0, Math.min(oppgaver.length - 1, indeks));
+      oppgaver.forEach(function (o, i) { o.hidden = i !== na; });
+      teller.textContent = 'Oppgave ' + (na + 1) + ' av ' + oppgaver.length;
+      forrige.disabled = na === 0;
+      neste.disabled = na === oppgaver.length - 1;
+      if (history.replaceState) history.replaceState(null, '', '#oppgave-' + (na + 1));
+      if (flyttFokus) oppgaver[na].querySelector('h2').focus();
+    }
+
+    forrige.addEventListener('click', function () { vis(na - 1, true); });
+    neste.addEventListener('click', function () { vis(na + 1, true); });
+    document.addEventListener('keydown', function (e) {
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+      if (e.target.closest && e.target.closest('.live, input, textarea, select, [role="switch"]')) return;
+      if (e.key === 'ArrowRight') { vis(na + 1, true); e.preventDefault(); }
+      if (e.key === 'ArrowLeft') { vis(na - 1, true); e.preventDefault(); }
+    });
+
+    function fraAdresse(flyttFokus) {
+      var m = location.hash.match(/oppgave-(\d+)/);
+      vis(m ? Number(m[1]) - 1 : 0, flyttFokus);
+    }
+    window.addEventListener('hashchange', function () { fraAdresse(true); });
+    fraAdresse(false);
+  })();
+</script>
+</body>
+</html>
