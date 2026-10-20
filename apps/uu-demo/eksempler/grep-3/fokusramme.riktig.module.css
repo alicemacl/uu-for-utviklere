@@ -1,0 +1,4 @@
+.verktoy :focus-visible {
+  outline: 3px solid #0b5a6b;
+  outline-offset: 3px;
+}
