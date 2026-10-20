@@ -1,17 +1,30 @@
 {
   "name": "uu-playwright-demo",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "private": true,
   "description": "Demo til UU-kurset: axe-røyktest + tastaturtester i Playwright",
   "scripts": {
-    "start": "node serve.mjs",
+    "dev": "next dev -p 4173",
+    "build": "next build",
+    "start": "next start -p 4173",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
     "test": "playwright test",
     "report": "playwright show-report"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "next": "16.4.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
-    "@playwright/test": "^1.64.1"
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@uu/config": "workspace:*",
+    "eslint": "^9",
+    "typescript": "^5"
   }
 }

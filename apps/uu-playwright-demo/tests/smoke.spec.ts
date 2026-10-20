@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 // Røyktest: kjør axe på de viktigste sidene. Legg til nye ruter i lista.
-const sider = ['/broken.html', '/axe-green.html', '/fixed.html'];
+const sider = ['/broken', '/axe-green', '/fixed'];
 
 for (const side of sider) {
   test(`axe: ingen WCAG A/AA-brudd på ${side}`, async ({ page }, testInfo) => {

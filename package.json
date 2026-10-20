@@ -1,0 +1,19 @@
+{
+  "name": "uu-for-utviklere",
+  "private": true,
+  "description": "Demo-apper til kurset «UU for utviklere»",
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=20.9"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "turbo": "^2.11.9"
+  }
+}

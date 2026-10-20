@@ -1,0 +1,5 @@
+/* Felles grunnstiler. Alt annet ligger i CSS-moduler. */
+* { box-sizing: border-box; }
+body { margin: 0; font: 18px/1.5 system-ui, sans-serif; color: #1d1d1f; background: #faf9f7; }
+input { font: inherit; padding: 10px 12px; border: 1px solid #8a8a8a; border-radius: 6px; background: #fff; }
+:focus-visible { outline: 3px solid #c2410c; outline-offset: 3px; }

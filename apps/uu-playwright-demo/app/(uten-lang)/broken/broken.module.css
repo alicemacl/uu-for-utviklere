@@ -1,0 +1,3 @@
+/* «Designet ville ha det sånn» */
+.side :focus { outline: none; }
+.side .lysHint { color: #b5b5b5; }

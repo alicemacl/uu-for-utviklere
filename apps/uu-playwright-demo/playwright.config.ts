@@ -13,14 +13,16 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        // Kun nødvendig i sandkassa der demoen ble kjørt – lokalt kan du fjerne denne linjen.
+        // Bare nødvendig i miljøer med en ferdig installert Chromium – lokalt kan du se bort fra denne linjen.
         launchOptions: process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {},
       },
     },
   ],
   webServer: {
-    command: 'node serve.mjs',
-    url: 'http://localhost:4173/fixed.html',
-    reuseExistingServer: true,
+    // Testene kjører mot et produksjonsbygg, slik siden blir på Vercel
+    command: 'pnpm build && pnpm start',
+    url: 'http://localhost:4173/fixed',
+    reuseExistingServer: !process.env.CI,
+    timeout: 180_000,
   },
 });

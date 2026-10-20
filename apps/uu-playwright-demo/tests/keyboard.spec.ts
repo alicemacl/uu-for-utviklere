@@ -1,7 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 
 // Det axe ikke ser: roller og tab-rekkefølge. Rekkefølgen under er bestemt av et menneske.
-const sider = ['/broken.html', '/axe-green.html', '/fixed.html'];
+const sider = ['/broken', '/axe-green', '/fixed'];
 const forventetTabRekkefolge = ['Hjem', 'Kurs', 'Navn', 'E-post', 'Send inn', 'Avbryt'];
 
 async function navnPaFokusertElement(page: Page) {
@@ -34,7 +34,7 @@ for (const side of sider) {
 }
 
 test('skjemaet sett fra en skjermleser (ARIA-snapshot)', async ({ page }) => {
-  await page.goto('/fixed.html');
+  await page.goto('/fixed');
   await expect(page.getByRole('main')).toMatchAriaSnapshot(`
     - heading "Meld deg på UU-kurset" [level=1]
     - textbox "Navn"
