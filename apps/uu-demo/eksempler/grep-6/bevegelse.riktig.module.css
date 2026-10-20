@@ -1,0 +1,6 @@
+.rull { animation: rull 6s linear infinite; white-space: nowrap; }
+@keyframes rull { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .rull { animation: none; white-space: normal; }
+}

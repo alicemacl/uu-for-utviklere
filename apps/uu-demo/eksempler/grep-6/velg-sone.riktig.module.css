@@ -1,0 +1,29 @@
+/* React Aria setter tilstanden som data-attributter – det er alt du trenger for å style */
+.velger { max-width: 20rem; }
+.rad { display: flex; }
+
+.felt { flex: 1; min-width: 0; border-radius: 6px 0 0 6px; }
+.knapp {
+  width: 2.75rem; font: inherit; cursor: pointer;
+  border: 2px solid #5f6b6e; border-left: 0; border-radius: 0 6px 6px 0;
+  background: #e6f1f2; color: #0b3a44;
+}
+.knapp[data-pressed] { background: #cfe3e6; }
+.knapp[data-focus-visible] { outline: 3px solid #0b5a6b; outline-offset: 2px; }
+.velger[data-open] .knapp span { display: inline-block; transform: rotate(180deg); }
+
+/* Lista legges i en popover over resten av siden */
+.popover {
+  width: var(--trigger-width);
+  background: #fff; color: #1c2326;
+  border: 2px solid #0b5a6b; border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+.liste { padding: 0.25rem; outline: none; max-height: 14rem; overflow: auto; }
+
+.valg { padding: 0.45rem 0.7rem; border-radius: 6px; cursor: pointer; outline: none; }
+.valg[data-focused] { background: #e6f1f2; }
+.valg[data-focus-visible] { box-shadow: inset 0 0 0 2px #0b5a6b; }
+.valg[data-selected] { font-weight: 700; }
+.valg[data-selected]::after { content: " ✓"; }
