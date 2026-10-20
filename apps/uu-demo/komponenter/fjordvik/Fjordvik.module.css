@@ -1,0 +1,140 @@
+/*
+  Felles utseende for Fjordvik kommune – brukes av både /demo/feil og /demo/fikset.
+  Det som skiller versjonene, ligger i hver sides egen CSS-modul (feil.module.css og fikset.module.css).
+
+  .fjordvik sitter på <html>. Klassene inni er globale med :global(), så markupen ser ut som
+  på en vanlig nettside når du inspiserer den i DevTools.
+
+  Rekkefølgen er viktig: Denne fila importeres før sidens egen modul, og alle velgerne
+  starter med én klasse på <html>. Da vinner de samme reglene som i den statiske versjonen.
+*/
+
+.fjordvik, .fjordvik * { box-sizing: border-box; }
+
+.fjordvik { font-size: 100%; }
+
+.fjordvik body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  color: #1c2326;
+  background: #ffffff;
+}
+
+.fjordvik img { max-width: 100%; height: auto; display: block; }
+
+.fjordvik a { color: #0b5a6b; }
+
+/* ---------- Toppen ---------- */
+.fjordvik :global(.topp) { background: #ffffff; border-bottom: 1px solid #d5dddf; }
+.fjordvik :global(.topp__indre) {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 2rem;
+  max-width: 68rem; margin: 0 auto; padding: 0.75rem 1.5rem;
+}
+.fjordvik :global(.topp .logo) { display: block; flex: none; }
+.fjordvik :global(.topp .logo) img { width: 200px; max-width: 100%; }
+
+.fjordvik :global(.meny) { display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; margin: 0; padding: 0; list-style: none; flex: 1 1 18rem; }
+.fjordvik :global(.meny) a, .fjordvik :global(.meny .menypunkt) {
+  display: inline-block; padding: 0.5rem 0;
+  color: #1c2326; font-weight: 600; text-decoration: none; cursor: pointer;
+  border-bottom: 3px solid transparent;
+}
+.fjordvik :global(.meny) a:hover, .fjordvik :global(.meny .menypunkt):hover { border-bottom-color: #0b5a6b; }
+.fjordvik :global(.meny) [aria-current="page"], .fjordvik :global(.meny .aktiv) { border-bottom-color: #0b5a6b; }
+
+.fjordvik :global(.ikonknapp) {
+  display: inline-grid; place-items: center;
+  width: 44px; height: 44px; padding: 0;
+  border: 0; border-radius: 50%; flex: none;
+  background: #e6f1f2; color: #0b3a44; cursor: pointer;
+}
+.fjordvik :global(.ikonknapp) svg { width: 22px; height: 22px; }
+
+/* ---------- Varselstripe (rullende tekst) ---------- */
+.fjordvik :global(.varsel) { background: #fff4d6; border-bottom: 1px solid #f0d58a; overflow: hidden; }
+.fjordvik :global(.varsel__indre) { display: flex; align-items: center; gap: 1rem; max-width: 68rem; margin: 0 auto; padding: 0.4rem 1.5rem; }
+.fjordvik :global(.varsel__spor) { overflow: hidden; flex: 1; }
+.fjordvik :global(.varsel__tekst) {
+  display: inline-block; white-space: nowrap; padding-left: 100%;
+  font-weight: 600; color: #4a3500;
+  animation: rull 14s linear infinite;
+}
+@keyframes rull { to { transform: translateX(-100%); } }
+
+/* ---------- Innhold ---------- */
+.fjordvik :global(.side) { max-width: 68rem; margin: 0 auto; padding: 1.5rem 1.5rem 4rem; }
+
+.fjordvik :global(.brodsmuler) { font-size: 0.9375rem; margin-bottom: 1rem; }
+.fjordvik :global(.brodsmuler) ol { display: flex; flex-wrap: wrap; gap: 0.25rem; margin: 0; padding: 0; list-style: none; }
+.fjordvik :global(.brodsmuler) li + li::before { content: "›"; margin-right: 0.25rem; color: #5f6b6e; }
+
+.fjordvik :global(.h1), .fjordvik h1 { font-family: Georgia, "Times New Roman", serif; font-size: 2.5rem; line-height: 1.15; margin: 0 0 0.75rem; font-weight: 700; color: #0b3a44; }
+.fjordvik :global(.h2), .fjordvik h2 { font-family: Georgia, "Times New Roman", serif; font-size: 1.75rem; line-height: 1.2; margin: 2.5rem 0 0.75rem; font-weight: 700; color: #0b3a44; }
+.fjordvik h3 { font-size: 1.25rem; margin: 1.5rem 0 0.5rem; }
+
+.fjordvik :global(.ingress) { font-size: 1.25rem; max-width: 42rem; margin: 0 0 1.5rem; }
+
+.fjordvik :global(.hero) { border-radius: 12px; overflow: hidden; margin: 1.5rem 0; }
+.fjordvik :global(.hero) img { width: 100%; height: 260px; object-fit: cover; }
+
+.fjordvik :global(.to-kol) { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+@media (min-width: 52rem) { .fjordvik :global(.to-kol) { grid-template-columns: 3fr 2fr; } }
+
+.fjordvik :global(.kort) { background: #eef5f6; border-radius: 12px; padding: 1.25rem 1.5rem; }
+.fjordvik :global(.kort) dl { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1rem; margin: 0; }
+.fjordvik :global(.kort) dt { font-weight: 700; }
+.fjordvik :global(.kort) dd { margin: 0; }
+.fjordvik :global(.kort) p { margin: 0.5rem 0; }
+
+.fjordvik :global(.sonekart) { border: 1px solid #d5dddf; border-radius: 12px; overflow: hidden; background: #f3efe3; }
+.fjordvik :global(.sonekart) figcaption, .fjordvik :global(.sonekart .bildetekst) { padding: 0.5rem 1rem; font-size: 0.9375rem; background: #ffffff; }
+
+/* ---------- Skjema ---------- */
+.fjordvik :global(.skjema) { max-width: 40rem; }
+.fjordvik :global(.felt) { margin-bottom: 1.25rem; }
+.fjordvik :global(.felt) label, .fjordvik :global(.felt .etikett) { display: block; font-weight: 600; margin-bottom: 0.25rem; }
+.fjordvik :global(.felt .hjelp) { display: block; font-size: 0.9375rem; margin-bottom: 0.35rem; }
+.fjordvik :global(.felt) input[type="text"], .fjordvik :global(.felt) input[type="email"], .fjordvik :global(.felt) input[type="tel"], .fjordvik :global(.felt) input:not([type]) {
+  width: 100%; max-width: 28rem;
+  font: inherit; padding: 0.6rem 0.75rem;
+  border: 2px solid #5f6b6e; border-radius: 6px; background: #fff; color: inherit;
+}
+.fjordvik :global(.felt.kort-felt) input { max-width: 12rem; }
+
+.fjordvik :global(.rad) { display: flex; flex-wrap: wrap; gap: 1rem; }
+.fjordvik :global(.rad .felt) { flex: 1 1 12rem; }
+
+.fjordvik :global(.chips) { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.fjordvik :global(.chip) {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.6rem 1.1rem; border: 2px solid #5f6b6e; border-radius: 999px;
+  background: #fff; cursor: pointer; font-weight: 600; user-select: none;
+}
+
+.fjordvik :global(.knapp) {
+  display: inline-block; font: inherit; font-weight: 700;
+  padding: 0.8rem 1.75rem; border: 0; border-radius: 8px;
+  background: #0b5a6b; color: #ffffff; cursor: pointer; text-decoration: none;
+}
+.fjordvik :global(.knapp):hover { background: #084552; }
+.fjordvik :global(.knapp--sekundaer) { background: #ffffff; color: #0b5a6b; box-shadow: inset 0 0 0 2px #0b5a6b; }
+.fjordvik :global(.knapp--sekundaer):hover { background: #e6f1f2; }
+
+/* ---------- Bunn ---------- */
+.fjordvik :global(.bunn) { background: #0b3a44; color: #e8f2f3; }
+.fjordvik :global(.bunn__indre) { max-width: 68rem; margin: 0 auto; padding: 2rem 1.5rem; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+.fjordvik :global(.bunn) a { color: #ffffff; }
+.fjordvik :global(.bunn) ul { list-style: none; margin: 0; padding: 0; }
+.fjordvik :global(.bunn) li { margin-bottom: 0.35rem; }
+.fjordvik :global(.bunn .bunn__tittel) { font-weight: 700; margin: 0 0 0.5rem; font-size: 1rem; }
+
+/* ---------- Informasjonskapsler ---------- */
+.fjordvik :global(.cookies) {
+  position: fixed; inset: auto 0 0 0; z-index: 10;
+  background: #ffffff; border-top: 4px solid #0b5a6b;
+  box-shadow: 0 -6px 24px rgba(0,0,0,.15);
+}
+.fjordvik :global(.cookies__indre) { max-width: 68rem; margin: 0 auto; padding: 1rem 1.5rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2rem; }
+.fjordvik :global(.cookies) p { margin: 0; flex: 1 1 24rem; }
+.fjordvik :global(.cookies .knapper) { display: flex; gap: 0.75rem; flex-wrap: wrap; }

@@ -1,0 +1,36 @@
+/*
+  Det som gjør feil-versjonen feil. Lastes etter Fjordvik.module.css og bruker like spesifikke
+  velgere (én klasse på <html> foran), så reglene vinner på samme måte som i den statiske versjonen.
+*/
+
+/* FEIL 3: «Designeren syntes fokusrammene var stygge» */
+.feilside :focus { outline: none; }
+
+/* FEIL 2: «Vi støtter bare desktop» – fast bredde gir vannrett rulling ved zoom */
+.feilside :global(.topp__indre), .feilside :global(.varsel__indre), .feilside :global(.side), .feilside :global(.bunn__indre) { width: 1100px; max-width: none; }
+
+/* FEIL 10: Lys grå tekst «ser mer elegant ut» */
+.feilside :global(.ingress), .feilside :global(.hjelp), .feilside :global(.brodsmuler), .feilside :global(.liten) { color: #a3a3a3; }
+.feilside input::placeholder { color: #c2c2c2; }
+.feilside :global(.felt) input[type="text"] { border: 1px solid #e4e4e4; }
+.feilside :global(.chip) { border: 1px solid #e4e4e4; }
+
+/* FEIL 10: Lenker skilles bare med farge */
+.feilside :global(.side) a { text-decoration: none; color: #2b5f6a; }
+
+.feilside :global(.chip.valgt) { background: #0b5a6b; border-color: #0b5a6b; color: #ffffff; }
+.feilside :global(.avkrysning) { display: inline-flex; align-items: center; gap: 0.6rem; cursor: pointer; user-select: none; }
+.feilside :global(.avkrysning .boks) { width: 22px; height: 22px; border: 1px solid #cccccc; border-radius: 4px; display: inline-grid; place-items: center; background: #fff; }
+.feilside :global(.avkrysning.pa .boks) { background: #0b5a6b; border-color: #0b5a6b; }
+.feilside :global(.avkrysning.pa .boks)::after { content: "✓"; color: #fff; font-size: 14px; }
+
+/* FEIL 16: Feil vises bare med rød farge */
+.feilside :global(.felt input.feil), .feilside :global(.chips.feil .chip), .feilside :global(.avkrysning.feil .boks) { border-color: #e03131; }
+.feilside :global(.feilmelding) { display: none; color: #e03131; font-weight: 600; margin-bottom: 1rem; }
+
+/* FEIL 17: kvitteringen er en toast som forsvinner */
+.feilside :global(.toast) {
+  display: none; position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%);
+  background: #2f9e44; color: #fff; padding: 0.9rem 1.5rem; border-radius: 8px; font-weight: 700;
+  box-shadow: 0 6px 24px rgba(0,0,0,.2); z-index: 20;
+}
