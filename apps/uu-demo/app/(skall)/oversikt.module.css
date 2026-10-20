@@ -1,0 +1,16 @@
+.hode { display: grid; gap: 2rem; align-items: center; grid-template-columns: 1fr; margin-bottom: 3rem; }
+@media (min-width: 60rem) { .hode { grid-template-columns: 3fr 2fr; } }
+.gradient { aspect-ratio: 4 / 3; border-radius: 18px; background: linear-gradient(180deg, #ece6f4 0%, #f3cfae 42%, #e7a9d9 72%, #a46ad8 100%); }
+
+.runder { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr)); margin-top: 1.25rem; }
+.runder h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+.runder ul { margin: 0; padding-left: 1.2rem; }
+.runder li { margin-bottom: 0.35rem; }
+
+.alleFeil { margin-top: 1.25rem; }
+.alleFeil > summary { cursor: pointer; font-weight: 700; padding: 0.75rem 1rem; background: var(--navy-2); border: 1px solid var(--linje); border-radius: var(--radius); }
+.alleFeil[open] > summary { border-radius: var(--radius) var(--radius) 0 0; }
+.alleFeil ol { margin: 0; padding: 1rem 1.25rem 1rem 2.75rem; background: var(--navy-2); border: 1px solid var(--linje); border-top: 0; border-radius: 0 0 var(--radius) var(--radius); columns: 2 26rem; column-gap: 3rem; }
+.alleFeil li { margin-bottom: 0.45rem; break-inside: avoid; }
+
+.tips li { margin-bottom: 0.5rem; }
