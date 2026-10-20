@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import s from './global-not-found.module.css';
 import './globals.css';
 
@@ -17,7 +18,7 @@ export default function FantIkkeSiden() {
           <h1>Fant ikke siden</h1>
           <p>Adressen finnes ikke i demo-appen. Kanskje den har flyttet da appen gikk over til Next.js?</p>
           <p>
-            <a href="/">Gå til oversikten</a>
+            <Link href="/">Gå til oversikten</Link>
           </p>
         </main>
       </body>
